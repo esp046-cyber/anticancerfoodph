@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filipino Anti-Cancer Food Guide 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            color: #fff;
+            padding: 1%;
+            min-height: 100vh;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.25), rgba(16, 185, 129, 0.25));
+            border: 2px solid rgba(34, 197, 94, 0.5);
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #10b981;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 11px;
+            margin-top: 5px;
+            color: #d1fae5;
+        }
+        
+        .streak-section {
+            background: linear-gradient(135deg, rgba(251, 146, 60, 0.25), rgba(249, 115, 22, 0.2));
+            border: 2px solid rgba(251, 146, 60, 0.5);
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .streak-display {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fb923c;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .streak-subtitle {
+            font-size: 10px;
+            margin-top: 3px;
+            color: #fed7aa;
+            opacity: 0.9;
+        }
+        
+        .progress-section {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5));
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 2px solid rgba(34, 197, 94, 0.4);
+        }
+        
+        .progress-text {
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #10b981;
+        }
+        
+        .progress-bar {
+            background: rgba(0, 0, 0, 0.6);
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #10b981, #059669);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .category {
+            font-size: 13px;
+            font-weight: 700;
+            padding: 10px 12px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5));
+            border-radius: 6px;
+            margin: 20px 0 10px 0;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .food-item {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.1));
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 2px solid;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .food-item:active {
+            transform: scale(0.98);
+        }
+        
+        .food-item.done {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(16, 185, 129, 0.2));
+            border-color: #10b981;
+        }
+        
+        .food-item.done .food-name::before {
+            content: '✓ ';
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .vegetables { border-color: #10b981; }
+        .fruits { border-color: #fb923c; }
+        .legumes { border-color: #a78bfa; }
+        .spices { border-color: #f87171; }
+        .seafood { border-color: #38bdf8; }
+        .grains { border-color: #fbbf24; }
+        .roots { border-color: #f97316; }
+        .leafy { border-color: #22c55e; }
+        
+        .food-name {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .tagalog {
+            font-size: 11px;
+            opacity: 0.8;
+            font-style: italic;
+        }
+        
+        .daily-amount {
+            font-size: 12px;
+            color: #000;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 8px 0;
+        }
+        
+        .benefits {
+            font-size: 11px;
+            line-height: 1.5;
+            opacity: 0.95;
+            color: #e0f9ff;
+        }
+        
+        .planner-section {
+            margin-top: 25px;
+        }
+        
+        .day-item {
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.2), rgba(139, 92, 246, 0.15));
+            border: 2px solid rgba(167, 139, 250, 0.4);
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .day-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: #c4b5fd;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        .meal-input {
+            width: 100%;
+            min-height: 60px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            padding: 8px;
+            color: #fff;
+            font-size: 12px;
+            font-family: inherit;
+            resize: vertical;
+        }
+        
+        .meal-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .meal-input:focus {
+            outline: none;
+            border-color: #a78bfa;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 14px;
+            border: 2px solid;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        
+        .btn-save {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff;
+            border-color: #10b981;
+        }
+        
+        .btn-save:active {
+            transform: scale(0.97);
+        }
+        
+        .btn-clear {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: #fff;
+            border-color: #ef4444;
+        }
+        
+        .btn-clear:active {
+            transform: scale(0.97);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            padding: 15px;
+            font-size: 10px;
+            opacity: 0.7;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 6px;
+            line-height: 1.6;
+        }
+        
+        .tap-hint {
+            text-align: center;
+            font-size: 11px;
+            color: #fbbf24;
+            margin-bottom: 15px;
+            padding: 8px;
+            background: rgba(251, 191, 36, 0.1);
+            border-radius: 4px;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+        
+        .reset-section {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .btn-reset {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: #fff;
+            border: 2px solid #3b82f6;
+            border-radius: 6px;
+            padding: 12px 20px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        
+        .btn-reset:active {
+            transform: scale(0.97);
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🛡️ Filipino Anti-Cancer Food Guide 2026</h1>
+        <div class="subtitle">Evidence-based daily intake recommendations</div>
+    </div>
+    
+    <div class="streak-section">
+        <div class="streak-display">
+            🔥 <span id="streak-count">0</span> Day Streak
+        </div>
+        <div class="streak-subtitle">Keep eating healthy!</div>
+    </div>
+    
+    <div class="progress-section">
+        <div class="progress-text" id="progress-text">0/35 Foods Eaten Today</div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+        </div>
+    </div>
+    
+    <div class="tap-hint">👆 Tap any food item to mark as eaten</div>
+    
+    <div class="reset-section">
+        <button class="btn-reset" onclick="resetDaily()">🔄 Reset Today's Progress</button>
+    </div>
+    
+    <div class="category">🥬 Cruciferous Vegetables</div>
+    
+    <div class="food-item vegetables" onclick="toggleFood(this)">
+        <div class="food-name">Malunggay <span class="tagalog">(Moringa)</span></div>
+        <div class="daily-amount">50-100g</div>
+        <div class="benefits">Rich in glucosinolates, vitamin C, beta-carotene. Anti-inflammatory, supports detoxification.</div>
+    </div>
+    
+    <div class="food-item vegetables" onclick="toggleFood(this)">
+        <div class="food-name">Ampalaya <span class="tagalog">(Bitter Gourd)</span></div>
+        <div class="daily-amount">75-150g</div>
+        <div class="benefits">Contains momordicin, charantin. Regulates blood sugar, induces apoptosis in cancer cells.</div>
+    </div>
+    
+    <div class="food-item vegetables" onclick="toggleFood(this)">
+        <div class="food-name">Pechay <span class="tagalog">(Bok Choy)</span></div>
+        <div class="daily-amount">100-150g</div>
+        <div class="benefits">High in indole-3-carbinol, calcium, vitamin K. Hormone-balancing properties.</div>
+    </div>
+    
+    <div class="category">🥔 Root Vegetables</div>
+    
+    <div class="food-item roots" onclick="toggleFood(this)">
+        <div class="food-name">Kamote <span class="tagalog">(Sweet Potato)</span></div>
+        <div class="daily-amount">100-150g</div>
+        <div class="benefits">Beta-carotene, anthocyanins, fiber. Antioxidant, regulates blood sugar, supports gut health.</div>
+    </div>
+    
+    <div class="food-item roots" onclick="toggleFood(this)">
+        <div class="food-name">Ube <span class="tagalog">(Purple Yam)</span></div>
+        <div class="daily-amount">80-120g</div>
+        <div class="benefits">Anthocyanins, diosgenin. Powerful antioxidant, anti-inflammatory, neuroprotective.</div>
+    </div>
+    
+    <div class="category">🥒 Leafy & Nightshade Vegetables</div>
+    
+    <div class="food-item leafy" onclick="toggleFood(this)">
+        <div class="food-name">Kangkong <span class="tagalog">(Water Spinach)</span></div>
+        <div class="daily-amount">100-150g</div>
+        <div class="benefits">Lutein, zeaxanthin, vitamin A. Eye health, reduces oxidative stress.</div>
+    </div>
+    
+    <div class="food-item leafy" onclick="toggleFood(this)">
+        <div class="food-name">Saluyot <span class="tagalog">(Jute Leaves)</span></div>
+        <div class="daily-amount">80-120g</div>
+        <div class="benefits">Chlorogenic acid, quercetin, fiber. Anti-diabetic, cardiovascular protection.</div>
+    </div>
+    
+    <div class="food-item vegetables" onclick="toggleFood(this)">
+        <div class="food-name">Talong <span class="tagalog">(Eggplant)</span></div>
+        <div class="daily-amount">100-150g</div>
+        <div class="benefits">Nasunin, chlorogenic acid. Protects cell membranes, antioxidant properties.</div>
+    </div>
+    
+    <div class="food-item vegetables" onclick="toggleFood(this)">
+        <div class="food-name">Okra <span class="tagalog">(Okra)</span></div>
+        <div class="daily-amount">80-120g</div>
+        <div class="benefits">Polyphenols, pectin, vitamin K. Supports digestion, blood sugar regulation.</div>
+    </div>
+    
+    <div class="food-item fruits" onclick="toggleFood(this)">
+        <div class="food-name">Kamatis <span class="tagalog">(Tomatoes)</span></div>
+        <div class="daily-amount">100-200g</div>
+        <div class="benefits">Lycopene, vitamin C, potassium. Prostate health, cardiovascular support.</div>
+    </div>
+    
+    <div class="food-item spices" onclick="toggleFood(this)">
+        <div class="food-name">Sili <span class="tagalog">(Chili Peppers)</span></div>
+        <div class="daily-amount">5-15g</div>
+        <div class="benefits">Capsaicin, vitamin C. Boosts metabolism, pain relief, anti-cancer properties.</div>
+    </div>
+    
+    <div class="category">🍊 Anti-Cancer Fruits</div>
+    
+    <div class="food-item fruits" onclick="toggleFood(this)">
+        <div class="food-name">Guyabano <span class="tagalog">(Soursop)</span></div>
+        <div class="daily-amount">100-200g</div>
+        <div class="benefits">Acetogenins target cancer cell mitochondria. High in vitamin C, fiber, antioxidants.</div>
+    </div>
+    
+    <div class="food-item fruits" onclick="toggleFood(this)">
+        <div class="food-name">Papaya <span class="tagalog">(Papaya)</span></div>
+        <div class="daily-amount">150-200g</div>
+        <div class="benefits">Papain enzyme, lycopene, vitamin A. Supports digestion, reduces oxidative stress.</div>
+    </div>
+    
+    <div class="food-item fruits" onclick="toggleFood(this)">
+        <div class="food-name">Calamansi <span class="tagalog">(Philippine Lime)</span></div>
+        <div class="daily-amount">30-50g</div>
+        <div class="benefits">Limonoids, hesperidin, vitamin C. Boosts immunity, alkalizing effect on body.</div>
+    </div>
+    
+    <div class="food-item fruits" onclick="toggleFood(this)">
+        <div class="food-name">Bayabas <span class="tagalog">(Guava)</span></div>
+        <div class="daily-amount">100-150g</div>
+        <div class="benefits">Lycopene, quercetin, vitamin C. Powerful antioxidant, anti-proliferative effects.</div>
+    </div>
+    
+    <div class="category">🌾 Legumes & Seeds</div>
+    
+    <div class="food-item legumes" onclick="toggleFood(this)">
+        <div class="food-name">Munggo <span class="tagalog">(Mung Beans)</span></div>
+        <div class="daily-amount">50-100g</div>
+        <div class="benefits">Vitexin, isovitexin, phytic acid. Reduces inflammation, supports liver detox.</div>
+    </div>
+    
+    <div class="food-item legumes" onclick="toggleFood(this)">
+        <div class="food-name">Sitaw <span class="tagalog">(Yard-Long Beans)</span></div>
+        <div class="daily-amount">80-120g</div>
+        <div class="benefits">Fiber, folate, manganese. Promotes gut health, stabilizes blood sugar.</div>
+    </div>
+    
+    <div class="category">🌶️ Spices & Aromatics</div>
+    
+    <div class="food-item spices" onclick="toggleFood(this)">
+        <div class="food-name">Luya <span class="tagalog">(Ginger)</span></div>
+        <div class="daily-amount">10-20g</div>
+        <div class="benefits">Gingerol, shogaol. Anti-nausea, anti-inflammatory, inhibits tumor growth.</div>
+    </div>
+    
+    <div class="food-item spices" onclick="toggleFood(this)">
+        <div class="food-name">Bawang <span class="tagalog">(Garlic)</span></div>
+        <div class="daily-amount">5-10g</div>
+        <div class="benefits">Allicin, diallyl sulfide. Immune-boosting, prevents DNA damage.</div>
+    </div>
+    
+    <div class="food-item spices" onclick="toggleFood(this)">
+        <div class="food-name">Luyang Dilaw <span class="tagalog">(Turmeric)</span></div>
+        <div class="daily-amount">5-8g</div>
+        <div class="benefits">Curcumin. Potent anti-inflammatory, blocks cancer pathways, enhances apoptosis.</div>
+    </div>
+    
+    <div class="food-item spices" onclick="toggleFood(this)">
+        <div class="food-name">Tanglad <span class="tagalog">(Lemongrass)</span></div>
+        <div class="daily-amount">10-15g</div>
+        <div class="benefits">Citral, limonene. Anti-microbial, reduces cholesterol, induces cancer cell death.</div>
+    </div>
+    
+    <div class="food-item spices" onclick="toggleFood(this)">
+        <div class="food-name">Pandan <span class="tagalog">(Pandan Leaves)</span></div>
+        <div class="daily-amount">5-10g</div>
+        <div class="benefits">Alkaloids, glycosides. Antioxidant, detoxifying, blood sugar regulation.</div>
+    </div>
+    
+    <div class="category">🐟 Omega-3 Rich Seafood</div>
+    
+    <div class="food-item seafood" onclick="toggleFood(this)">
+        <div class="food-name">Galunggong <span class="tagalog">(Mackerel Scad)</span></div>
+        <div class="daily-amount">100-150g</div>
+        <div class="benefits">EPA/DHA omega-3, selenium. Anti-inflammatory, supports cellular health.</div>
+    </div>
+    
+    <div class="food-item seafood" onclick="toggleFood(this)">
+        <div class="food-name">Pusit <span class="tagalog">(Squid)</span></div>
+        <div class="daily-amount">80-120g</div>
+        <div class="benefits">High protein, selenium, vitamin B12. Supports immune function, low mercury.</div>
+    </div>
+    
+    <div class="category">🌾 Whole Grains</div>
+    
+    <div class="food-item grains" onclick="toggleFood(this)">
+        <div class="food-name">Brown Rice <span class="tagalog">(Bigas na Kayumanggi)</span></div>
+        <div class="daily-amount">150-200g</div>
+        <div class="benefits">Fiber, selenium, magnesium. Regulates insulin, supports gut microbiome.</div>
+    </div>
+    
+    <div class="food-item grains" onclick="toggleFood(this)">
+        <div class="food-name">Adlai <span class="tagalog">(Job's Tears)</span></div>
+        <div class="daily-amount">100-150g</div>
+        <div class="benefits">Coixenolide, high fiber. Lower glycemic index, anti-tumor properties.</div>
+    </div>
+    
+    <div class="category">🥕 More Vegetables & Fruits</div>
+    
+    <div class="food-item vegetables" onclick="toggleFood(this)">
+        <div class="food-name">Sayote <span class="tagalog">(Chayote)</span></div>
+        <div class="daily-amount">100-150g</div>
+        <div class="benefits">Vitamin C, folate, zinc. Low calorie, supports heart health, anti-inflammatory.</div>
+    </div>
+    
+    <div class="food-item vegetables" onclick="toggleFood(this)">
+        <div class="food-name">Kalabasa <span class="tagalog">(Squash)</span></div>
+        <div class="daily-amount">100-150g</div>
+        <div class="benefits">Beta-carotene, vitamin A, potassium. Eye health, immune support, antioxidant.</div>
+    </div>
+    
+    <div class="food-item vegetables" onclick="toggleFood(this)">
+        <div class="food-name">Labanos <span class="tagalog">(Radish)</span></div>
+        <div class="daily-amount">50-100g</div>
+        <div class="benefits">Glucosinolates, vitamin C. Detoxification, anti-cancer compounds, digestive health.</div>
+    </div>
+    
+    <div class="food-item vegetables" onclick="toggleFood(this)">
+        <div class="food-name">Mustasa <span class="tagalog">(Mustard Greens)</span></div>
+        <div class="daily-amount">80-120g</div>
+        <div class="benefits">Vitamin K, antioxidants, glucosinolates. Bone health, anti-inflammatory.</div>
+    </div>
+    
+    <div class="food-item leafy" onclick="toggleFood(this)">
+        <div class="food-name">Alugbati <span class="tagalog">(Malabar Spinach)</span></div>
+        <div class="daily-amount">80-120g</div>
+        <div class="benefits">Iron, vitamin A, folate. Blood health, vision support, anti-aging properties.</div>
+    </div>
+    
+    <div class="food-item fruits" onclick="toggleFood(this)">
+        <div class="food-name">Mangosteen <span class="tagalog">(Mangosteen)</span></div>
+        <div class="daily-amount">100-150g</div>
+        <div class="benefits">Xanthones, vitamin C. Powerful antioxidant, anti-inflammatory, anti-cancer properties.</div>
+    </div>
+    
+    <div class="food-item fruits" onclick="toggleFood(this)">
+        <div class="food-name">Santol <span class="tagalog">(Santol)</span></div>
+        <div class="daily-amount">80-120g</div>
+        <div class="benefits">Vitamin C, fiber, antioxidants. Immune support, digestive health.</div>
+    </div>
+    
+    <div class="food-item fruits" onclick="toggleFood(this)">
+        <div class="food-name">Duhat <span class="tagalog">(Java Plum)</span></div>
+        <div class="daily-amount">80-120g</div>
+        <div class="benefits">Anthocyanins, iron, vitamin C. Blood sugar regulation, anti-diabetic properties.</div>
+    </div>
+    
+    <div class="category">🥜 Nuts, Seeds & Healthy Fats</div>
+    
+    <div class="food-item grains" onclick="toggleFood(this)">
+        <div class="food-name">Cashew Nuts <span class="tagalog">(Kasuy)</span></div>
+        <div class="daily-amount">30-40g</div>
+        <div class="benefits">Magnesium, copper, healthy fats. Heart health, bone strength, antioxidant.</div>
+    </div>
+    
+    <div class="food-item legumes" onclick="toggleFood(this)">
+        <div class="food-name">Mongo Sprouts <span class="tagalog">(Toge)</span></div>
+        <div class="daily-amount">50-100g</div>
+        <div class="benefits">Enzymes, vitamin C, protein. Easy to digest, supports immunity, anti-inflammatory.</div>
+    </div>
+    
+    <div class="food-item grains" onclick="toggleFood(this)">
+        <div class="food-name">Sesame Seeds <span class="tagalog">(Linga)</span></div>
+        <div class="daily-amount">10-20g</div>
+        <div class="benefits">Lignans, calcium, vitamin E. Hormone balance, bone health, antioxidant.</div>
+    </div>
+    
+    <div class="food-item spices" onclick="toggleFood(this)">
+        <div class="food-name">Coconut Oil <span class="tagalog">(Langis ng Niyog)</span></div>
+        <div class="daily-amount">15-30ml</div>
+        <div class="benefits">Lauric acid, MCTs. Anti-microbial, brain health, energy boost.</div>
+    </div>
+    
+    <div class="planner-section">
+        <div class="category">📅 Weekly Meal Planner</div>
+        
+        <div class="day-item">
+            <div class="day-name">Monday</div>
+            <textarea class="meal-input" placeholder="Plan your anti-cancer meals..."></textarea>
+        </div>
+        
+        <div class="day-item">
+            <div class="day-name">Tuesday</div>
+            <textarea class="meal-input" placeholder="Plan your anti-cancer meals..."></textarea>
+        </div>
+        
+        <div class="day-item">
+            <div class="day-name">Wednesday</div>
+            <textarea class="meal-input" placeholder="Plan your anti-cancer meals..."></textarea>
+        </div>
+        
+        <div class="day-item">
+            <div class="day-name">Thursday</div>
+            <textarea class="meal-input" placeholder="Plan your anti-cancer meals..."></textarea>
+        </div>
+        
+        <div class="day-item">
+            <div class="day-name">Friday</div>
+            <textarea class="meal-input" placeholder="Plan your anti-cancer meals..."></textarea>
+        </div>
+        
+        <div class="day-item">
+            <div class="day-name">Saturday</div>
+            <textarea class="meal-input" placeholder="Plan your anti-cancer meals..."></textarea>
+        </div>
+        
+        <div class="day-item">
+            <div class="day-name">Sunday</div>
+            <textarea class="meal-input" placeholder="Plan your anti-cancer meals..."></textarea>
+        </div>
+        
+        <div class="buttons">
+            <button class="btn btn-save" onclick="saveMealPlan()">💾 Save Plan</button>
+            <button class="btn btn-clear" onclick="clearMealPlan()">🗑️ Clear All</button>
+        </div>
+    </div>
+    
+    <div class="footer">
+        ⚕️ Consult healthcare professionals before dietary changes<br>
+        Based on 2026 Philippine Dietary Guidelines & WHO recommendations<br>
+        Daily amounts are general guidelines - adjust to individual needs
+    </div>
+    
+    <script>
+        const totalFoods = 35;
+        
+        function toggleFood(element) {
+            element.classList.toggle('done');
+            updateProgress();
+            saveProgress();
+            checkStreak();
+        }
+        
+        function updateProgress() {
+            const doneItems = document.querySelectorAll('.food-item.done').length;
+            const percentage = (doneItems / totalFoods) * 100;
+            
+            document.getElementById('progress-fill').style.width = percentage + '%';
+            document.getElementById('progress-text').textContent = doneItems + '/' + totalFoods + ' Foods Eaten Today';
+        }
+        
+        function saveProgress() {
+            const foodItems = document.querySelectorAll('.food-item');
+            const states = Array.from(foodItems).map(item => item.classList.contains('done'));
+            localStorage.setItem('foodProgress', JSON.stringify(states));
+            localStorage.setItem('lastUpdated', new Date().toDateString());
+        }
+        
+        function loadProgress() {
+            const saved = localStorage.getItem('foodProgress');
+            const lastUpdated = localStorage.getItem('lastUpdated');
+            const today = new Date().toDateString();
+            
+            // Auto-reset if it's a new day
+            if (lastUpdated && lastUpdated !== today) {
+                // Previous day had progress, update streak
+                const savedCount = saved ? JSON.parse(saved).filter(Boolean).length : 0;
+                if (savedCount > 0) {
+                    updateStreak(true); // Completed previous day
+                } else {
+                    updateStreak(false); // Missed previous day
+                }
+                // Clear progress for new day
+                localStorage.removeItem('foodProgress');
+                updateProgress();
+            } else if (saved) {
+                // Same day, load progress
+                const states = JSON.parse(saved);
+                const foodItems = document.querySelectorAll('.food-item');
+                foodItems.forEach((item, index) => {
+                    if (states[index]) {
+                        item.classList.add('done');
+                    }
+                });
+                updateProgress();
+            }
+            
+            loadStreak();
+        }
+        
+        function resetDaily() {
+            alert('Reset function called! If you see this, the button works.');
+            console.log('Reset button clicked');
+            if (confirm('Reset all food progress for today? This will clear all checkmarks.')) {
+                console.log('User confirmed reset');
+                const foodItems = document.querySelectorAll('.food-item');
+                console.log('Found food items:', foodItems.length);
+                foodItems.forEach(item => {
+                    item.classList.remove('done');
+                });
+                localStorage.removeItem('foodProgress');
+                localStorage.removeItem('lastUpdated');
+                updateProgress();
+                console.log('Reset complete');
+            } else {
+                console.log('User cancelled reset');
+            }
+        }
+        
+        function checkStreak() {
+            const doneItems = document.querySelectorAll('.food-item.done').length;
+            const completionThreshold = Math.floor(totalFoods * 0.5); // 50% completion
+            
+            if (doneItems >= completionThreshold) {
+                localStorage.setItem('todayCompleted', 'true');
+            }
+        }
+        
+        function updateStreak(completed) {
+            let streak = parseInt(localStorage.getItem('streak') || '0');
+            
+            if (completed) {
+                streak++;
+            } else {
+                streak = 0; // Break streak
+            }
+            
+            localStorage.setItem('streak', streak.toString());
+            localStorage.setItem('lastStreakUpdate', new Date().toDateString());
+            document.getElementById('streak-count').textContent = streak;
+        }
+        
+        function loadStreak() {
+            const streak = parseInt(localStorage.getItem('streak') || '0');
+            document.getElementById('streak-count').textContent = streak;
+        }
+        
+        function saveMealPlan() {
+            const inputs = document.querySelectorAll('.meal-input');
+            const data = Array.from(inputs).map(input => input.value);
+            localStorage.setItem('mealPlan', JSON.stringify(data));
+            
+            const btn = document.querySelector('.btn-save');
+            const originalText = btn.textContent;
+            btn.textContent = '✅ Saved!';
+            btn.style.background = 'linear-gradient(135deg, #059669, #047857)';
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+            }, 1500);
+        }
+        
+        function clearMealPlan() {
+            if (confirm('Clear all meal plans?')) {
+                const inputs = document.querySelectorAll('.meal-input');
+                inputs.forEach(input => input.value = '');
+                localStorage.removeItem('mealPlan');
+            }
+        }
+        
+        function loadMealPlan() {
+            const saved = localStorage.getItem('mealPlan');
+            if (saved) {
+                const data = JSON.parse(saved);
+                const inputs = document.querySelectorAll('.meal-input');
+                inputs.forEach((input, index) => {
+                    if (data[index]) input.value = data[index];
+                });
+            }
+        }
+        
+        window.addEventListener('load', () => {
+            loadProgress();
+            loadMealPlan();
+        });
+        
+        document.querySelectorAll('.meal-input').forEach(input => {
+            input.addEventListener('blur', saveMealPlan);
+        });
+    </script>
+</body>
+</html>
